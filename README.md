@@ -18,6 +18,7 @@ Who said forms had to be boring? Let’s build **smarter, more exciting forms** 
 - **Response Analysis**: View total responses and visualize data with bar graphs.
 - **Wall-E Guidance**: A 3D model of Wall-E guides you through the process, making form creation interactive and fun.
 - **User Authentication**: Secure user authentication and form management using Django's `allauth`.
+- **Design Template Selection**: Choose from a variety of pre-made designs to customize the appearance of your form with just a click.
 
 --- 
 
@@ -32,13 +33,21 @@ Who said forms had to be boring? Let’s build **smarter, more exciting forms** 
 
 ---
 
+### How My AI Form Builder Helps the Community
+
+- **Empowers Non-Technical Users**: AI-driven form generation enables anyone, regardless of technical skill, to create professional forms easily, benefiting small businesses, educators, and non-profits.
+- **Streamlines Data Collection**: The dynamic form-building process simplifies gathering and analyzing data, helping organizations collect insights and make informed decisions efficiently.
+- **Facilitates Collaboration**: Sharing forms via unique links encourages collaboration, allowing community members to easily provide feedback and contribute.
+  
+---
+
 ### Installation
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/PiyushJain045/AiForm-Generator.git
    cd AiForm-Generator
 
-2. **Setup a Virtual Environment or Activate the Provided Environment**:
+2. **Setup a Virtual Environment**:
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
