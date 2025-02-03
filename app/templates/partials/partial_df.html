@@ -1,0 +1,80 @@
+{% for question in form_data.questions %}
+
+                <!-- Slider Question -->
+                {% if question.type == "slider" %}
+                <div class="form-group">
+                    <label for="workload-slider"> {{ question.text }} </label>
+                    <input type="range" id="workload-slider" name="workload-slider" min="{{ question.min }}" max="{{ question.max|add:1 }}">
+                    <div class="slider-labels">
+                        <span>Very Bad</span>
+                        <span>Incredible!</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Checkbox Button Question multiple choice-->
+                {% if question.type == "multiple-choice" %}
+                <div class="form-group">
+                    <label>{{ question.text }}</label>
+                    <div class="checkbox-group">
+                        {% for choice in question.choices %}
+                            <label>
+                                <input type="checkbox" name="{{ choice }}" value="{{ choice }}"> {{ choice }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- ***Radio Question single-choice -->
+                {% if question.type == "single-choice" %}
+                <div class="form-group">
+                    <label>{{ question.text }}</label>
+                    <div class="radio-group">
+                        {% for choice in question.choices %}
+                            <label>
+                                <input type="radio" name="radio-que" value="{{ choice }}"> {{ choice }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- *** dropdown-list -->
+                <div class="form-group">
+                    {% if question.type == "dropdown-list" %}
+                    <label for="career-growth">{{ question.text }}</label>
+                    <select id="career-growth" name="career-growth">
+                        {% for choice in question.choices %}
+                            <option value="{{ choice }}">{{ choice }}</option>
+                        {% endfor %}           
+                    </select>
+                    {% endif %}
+                </div>
+
+                <!-- Text Question -->
+                <div class="form-group">
+                    {% if question.type == "text" %}
+                        <label for="suggestions">{{ question.text }}</label>
+                        <input id="suggestions" name="suggestions" placeholder="Type your {{ question.type }} here...">
+                    {% endif %}
+                </div>
+
+                <!-- Textbox Question -->
+                <div class="form-group">
+                    {% if question.type == "textbox" %}
+                        <label for="suggestions">{{ question.text }}</label>
+                        <textarea id="suggestions" name="suggestions" rows="4" placeholder="Type your {{ question.type }} here..."></textarea>
+                    {% endif %}
+                </div>
+
+             {% endfor %}  
+             
+    
+             <div class="add-field">
+
+                {% if flag == True %}
+                <button type="button" class="add-button" id="add-field" hx-get="{% url 'add_field' %}" hx-target=".add-field" hx-swap="outerHTML">Add Field</button>
+                {% endif %}
+         
+            </div>

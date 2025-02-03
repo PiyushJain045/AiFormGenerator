@@ -1,0 +1,7 @@
+<div class="add-field">
+
+    {% if flag == True %}
+    <button type="button" class="add-button" id="add-field" hx-get="{% url 'add_field' %}" hx-target=".add-field" hx-swap="outerHTML">Add Field</button>
+    {% endif %}
+
+</div>

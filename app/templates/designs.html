@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Form Template</title>
+</head>
+<body>
+    <h1>Select a Design Template</h1>
+
+    <div class="template-container">
+        <form method="GET" action="{% url 'design_df' %}">
+            <!-- Hidden input to send slug to the backend -->
+            <input type="hidden" name="slug" value="{{ slug }}">
+
+            <button type="submit" name="selected_design" value="design1">Design 1</button>
+            <button type="submit" name="selected_design" value="design2">Design 2</button>
+            <button type="submit" name="selected_design" value="design3">Design 3</button>
+        </form>
+    </div>
+</body>
+</html>

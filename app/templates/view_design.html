@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose template</title>
+    <link rel="stylesheet" href="{% static 'css/designs/'|add:selected_design|add:'.css' %}" />
+    <script src="https://unpkg.com/htmx.org@1.9.2/dist/htmx.min.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Enter Form Title...</h1>
+        <form action="#">
+            <div class="form-group">
+                <!-- Slider Question -->
+                <label for="workload-slider">How would you rate your workload?</label>
+                <input type="range" id="workload-slider" name="workload-slider" min="1" max="5">
+                <div class="slider-labels">
+                    <span>Very Bad</span>
+                    <span>Incredible!</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Checkbox Button Question (Multiple Choice) -->
+                <label>What are your favorite programming languages?</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="Python" value="Python"> Python
+                    </label>
+                    <label>
+                        <input type="checkbox" name="JavaScript" value="JavaScript"> JavaScript
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Java" value="Java"> Java
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Radio Button Question (Single Choice) -->
+                <label>Which is your preferred development environment?</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="same-radio" value="VS Code"> VS Code
+                    </label>
+                    <label>
+                        <input type="radio" name="same-radio" value="PyCharm"> PyCharm
+                    </label>
+                    <label>
+                        <input type="radio" name="same-radio" value="IntelliJ"> IntelliJ
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <!-- Dropdown List -->
+                <label for="career-growth">How satisfied are you with your career growth?</label>
+                <select id="career-growth" name="career-growth">
+                    <option value="Very Satisfied">Very Satisfied</option>
+                    <option value="Satisfied">Satisfied</option>
+                    <option value="Neutral">Neutral</option>
+                    <option value="Dissatisfied">Dissatisfied</option>
+                    <option value="Very Dissatisfied">Very Dissatisfied</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <!-- Text Input -->
+                <label for="suggestions">Any suggestions for improvement?</label>
+                <input id="suggestions" name="suggestions" placeholder="Type your text here...">
+            </div>
+
+            <div class="form-group">
+                <!-- Textbox Input -->
+                <label for="feedback">Provide detailed feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" placeholder="Type your feedback here..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit" class="submit-button">Submit response</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

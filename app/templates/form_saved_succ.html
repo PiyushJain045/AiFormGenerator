@@ -1,0 +1,25 @@
+<!-- renders the 'success' message informing the user that the form was submitted successfully -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Saved Successfully</title>
+    <link rel="stylesheet" href="{% static 'css/form_saved_succ.css' %}">
+    <script>
+        // Disable the back button
+        history.pushState(null, document.title, location.href);
+        window.addEventListener('popstate', function (event) {
+            history.pushState(null, document.title, location.href);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Form Saved Successfully!</h1>
+        <p class="message">Thank you for submitting the form.</p>
+        <p class="unique-id">Your unique submission ID: <strong>{{ unique_id }}</strong></p>
+    </div>
+</body>
+</html>

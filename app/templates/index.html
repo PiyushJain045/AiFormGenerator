@@ -1,0 +1,349 @@
+<!-- Landing/Home Page -->
+{% load static %}
+<!DOCTYPE html>
+<html
+  data-wf-domain="lerning-webflow.webflow.io"
+  data-wf-page="679359cffe7af37091c361de"
+  data-wf-site="679359cffe7af37091c361d8"
+  data-wf-status="1"
+>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ai Form Generator</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="Webflow" name="generator" />
+    <link
+      href="{% static 'css/style.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link
+      href="https://fonts.gstatic.com"
+      rel="preconnect"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+      type="text/javascript"
+    ></script>
+    <script type="text/javascript">
+      WebFont.load({
+        google: {
+          families: [
+            "Droid Serif:400,400italic,700,700italic",
+            "Vollkorn:400,400italic,700,700italic",
+          ],
+        },
+      });
+    </script>
+    <script type="text/javascript">
+      !(function (o, c) {
+        var n = c.documentElement,
+          t = " w-mod-";
+        (n.className += t + "js"),
+          ("ontouchstart" in o ||
+            (o.DocumentTouch && c instanceof DocumentTouch)) &&
+            (n.className += t + "touch");
+      })(window, document);
+    </script>
+    <link
+      href="https://cdn.prod.website-files.com/img/favicon.ico"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link
+      href="https://cdn.prod.website-files.com/img/webclip.png"
+      rel="apple-touch-icon"
+    />
+  </head>
+  <body class="body">
+    <section class="hero-section">
+      <div class="nav-wrapper">
+        <h1
+          data-w-id="e18c48af-c945-84c0-ae7e-9d4e39b0e4da"
+          style="opacity: 0"
+          class="heading-2"
+        >
+          Wall-E :)
+        </h1>
+        <div
+          data-w-id="cc5101ac-066d-4db5-8ed8-1c961d26bd73"
+          style="opacity: 0"
+          class="nav-button-wrapper"
+        >
+          <a href="{% url 'user-forms' %}" class="nav-link">My Forms</a
+          ><a href="{% url 'demo_design' %}" class="nav-link">templates</a
+          >
+        {% if user.is_authenticated %}
+          <a href="{% url 'account_logout' %}" class="nav-link">Logout</a>
+      {% else %}
+          <a href="{% url 'account_login' %}" class="nav-link">Login</a>
+      {% endif %}
+        </div>
+      </div>
+    </section>
+    <div class="div-block-3">
+      <div class="bot-dialouge">
+        <p
+          data-w-id="030cf243-1454-bf0e-a522-a2d3aeff7b9e"
+          
+          class="bot-talk-1"
+        >
+          Hello👋 {% if user.is_authenticated %} {{ request.user.username }} {% else %} my friend {% endif %} . It's nice to meet you! I am Wall-e🤖. I am here to
+          help you generate your form📝.
+        </p>
+      </div>
+    </div>
+    <div
+      id="w-node-_1331316a-e503-dab5-bbcc-2ed612910778-91c361de"
+      class="w-layout-layout quick-stack wf-layout-layout"
+    >
+      <div
+        id="w-node-_3b80b55b-1846-f9a2-ed80-b9b4d65998fd-91c361de"
+        class="w-layout-cell hero-cell"
+      >
+        <h1
+          data-w-id="08ea3e05-5997-faf3-86eb-c38815b1f1a5"
+          style="opacity: 0"
+          class="hero-heading"
+        >
+          Ai<br />Form<br />Generator
+        </h1>
+      </div>
+      <div
+        id="w-node-_98503ce5-d361-909c-06aa-0984ef17d64b-91c361de"
+        class="w-layout-cell wall-e-cell"
+      >
+        <div class="div-block-4">
+          <div
+            class="spline-scene-3"
+            data-w-id="43ae625d-0495-9b3a-28d3-eb6a1dc2826e"
+            data-animation-type="spline"
+            data-spline-url="https://prod.spline.design/TJVmmA3-x0KAMVbS/scene.splinecode"
+          >
+            <canvas></canvas>
+          </div>
+        </div>
+      </div>
+      <div
+        id="w-node-_690fb7ac-1e5e-755c-dcf3-4ffd7e4f9538-91c361de"
+        class="w-layout-cell form"
+      >
+        <div
+          data-w-id="18517046-4293-3983-ee08-b1ec544c9064"
+          style="opacity: 0"
+          class="form-field w-form"
+        >
+          <form
+            method="POST"
+            action = "{% url 'home' %}"
+            
+            
+            
+            data-w-id="18517046-4293-3983-ee08-b1ec544c9065"
+            
+            class="form-2"
+          >
+          {% csrf_token %}
+            <label for="form_description" class="form-label">Form Description:</label
+            ><textarea
+              id="field-2"
+              name="form_description"
+              maxlength="5000"
+              data-name="Field 2"
+              placeholder="Example prompt: We are conducting a detailed employee engagement survey for our tech company with 500 employees. The goal is to understand their satisfaction levels, identify areas of improvement, and gather feedback about management and work-life balance"
+              required=""
+              class="textarea w-input"
+            ></textarea
+            ><label for="goal_objective" class="form-label">Goal Objective:</label
+            ><textarea
+              id="field-3"
+              name="goal_objective"
+              maxlength="5000"
+              data-name="Field 3"
+              placeholder="Example prompt: The form should evaluate employees&#x27; satisfaction in terms of workload, team collaboration, management support, and career growth opportunities. Additionally, the form should identify common pain points to prioritize solutions."
+              required=""
+              class="w-input"
+            ></textarea
+            ><label for="tone_style" class="form-label">Preferred Tone Style:</label
+            ><input
+              class="w-input"
+              maxlength="256"
+              name="tone_style"
+              data-name="Name 2"
+              placeholder="Example prompt: Use an empathetic, conversational tone to encourage honest feedback."
+              type="text"
+              id="name-2"
+              required=""
+            /><label for="target_audience" class="form-label">Target Audience:</label
+            ><input
+              class="w-input"
+              maxlength="256"
+              name="target_audience"
+              data-name="Name"
+              placeholder="Example prompt: The respondents will be full-time software engineers and product managers with 1-5 years of experience working remotel"
+              type="text"
+              id="name"
+              required=""
+            /><label for="question_preferences" class="form-label">Question Preferences:</label
+            ><input
+              class="w-input"
+              maxlength="256"
+              name="question_preferences"
+              data-name="p"
+              placeholder="Example prompt: Provide options for question types: Multiple-choice (checkboxes or radio buttons) Likert scale (sliders) Open-ended text fields File uploads"
+              type="text"
+              id="p"
+              required=""
+            /><label for="num_questions" class="form-label">Number of Questions:</label
+            ><select
+              id="field"
+              name="num_questions"
+              data-name="Field"
+              required=""
+              class="w-select"
+            >
+              <option value="1-8">1-8</option>
+              <option value="9-16">9-16</option>
+              <option value="17-24">17-24</option>
+              <option value="24+">24+</option></select
+            ><button
+              type="submit"
+
+              
+              class="submit-button w-button"
+              
+            > Generate Form </button>
+          </form>
+          <div class="w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
+          </div>
+        </div>
+        <section
+          data-w-id="c835b7bc-6a02-be8c-38c4-345ee1661d7c"
+          style="opacity: 0"
+          class="footer-subscribe-3"
+        >
+          <div class="container-5">
+            <div class="footer-form-two w-form">
+              <form
+                id="wf-form-Footer-Form-Two"
+                name="wf-form-Footer-Form-Two"
+                data-name="Footer Form Two"
+                method="get"
+                class="footer-form-container-two"
+                data-wf-page-id="679359cffe7af37091c361de"
+                data-wf-element-id="c835b7bc-6a02-be8c-38c4-345ee1661d7f"
+                data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e"
+              >
+                <div class="footer-form-title">Subscribe Newsletters</div>
+                <div class="footer-form-block-two">
+                  <input
+                    class="footer-form-input w-input"
+                    maxlength="256"
+                    name="Footer-Email-Two"
+                    data-name="Footer Email Two"
+                    aria-label="Enter your email"
+                    placeholder="Enter your email"
+                    type="email"
+                    id="Footer-Email-Two"
+                    required=""
+                  /><input
+                    type="submit"
+                    data-wait="Please wait..."
+                    class="button-primary-3 footer-form-button w-button"
+                    value="Subscribe Now"
+                  />
+                </div>
+              </form>
+              <div class="w-form-done">
+                <div>Thank you! Your submission has been received!</div>
+              </div>
+              <div class="w-form-fail">
+                <div>Oops! Something went wrong while submitting the form.</div>
+              </div>
+            </div>
+            <div class="footer-wrapper-three">
+              <div class="footer-block-three">
+                <a href="#" class="footer-link-three">About us</a
+                ><a href="#" class="footer-link-three">Features</a
+                ><a href="#" class="footer-link-three">User Example</a
+                ><a href="#" class="footer-link-three">Pricing</a
+                ><a href="#" class="footer-link-three">Resources</a>
+              </div>
+              <div class="footer-social-block-three">
+                <a href="#" class="footer-social-link-three w-inline-block"
+                  ><img
+                    src="https://cdn.prod.website-files.com/62434fa732124a0fb112aab4/62434fa732124a705912aaeb_facebook%20big%20filled.svg"
+                    loading="lazy"
+                    alt="" /></a
+                ><a href="#" class="footer-social-link-three w-inline-block"
+                  ><img
+                    src="https://cdn.prod.website-files.com/62434fa732124a0fb112aab4/62434fa732124ab37a12aaf0_twitter%20big.svg"
+                    loading="lazy"
+                    alt="" /></a
+                ><a href="#" class="footer-social-link-three w-inline-block"
+                  ><img
+                    src="https://cdn.prod.website-files.com/62434fa732124a0fb112aab4/62434fa732124a61f512aaed_instagram%20big.svg"
+                    loading="lazy"
+                    alt="" /></a
+                ><a href="#" class="footer-social-link-three w-inline-block"
+                  ><img
+                    src="https://cdn.prod.website-files.com/62434fa732124a0fb112aab4/62434fa732124a717f12aaea_youtube%20small.svg"
+                    loading="lazy"
+                    alt=""
+                /></a>
+              </div>
+            </div>
+            <div class="footer-divider-two"></div>
+            <div class="footer-bottom">
+              <div class="footer-copyright">
+                © 2022 Company name. All rights reserved
+              </div>
+              <div class="footer-legal-block">
+                <a href="#" class="footer-legal-link">Terms Of Use</a
+                ><a href="#" class="footer-legal-link">Privacy Policy</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script
+      src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=679359cffe7af37091c361d8"
+      type="text/javascript"
+      integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{% static 'js/script.js' %}"
+      type="text/javascript"
+    ></script>
+
+    <script>
+      document.addEventListener("scroll", function () {
+        const scrollPosition = window.scrollY;
+        const botTalk = document.querySelector(".bot-talk-1");
+    
+        // Check scroll position and change text accordingly
+        if (scrollPosition < 500) {
+          botTalk.innerHTML =
+            "Hello👋 {% if user.is_authenticated %} {{ request.user.username }} {% else %} my friend {% endif %} . It's nice to meet you! I am Wall-e🤖. I am here to help you generate your form📝.";
+        } else if (scrollPosition < 850) {
+          botTalk.innerHTML =
+            "I see you're getting comfortable! Let me know what kind of form you'd like to generate.";
+        } else if (scrollPosition < 1500) {
+          botTalk.innerHTML =
+            "Enter the prompt. You can refer to the example shown here. Then click on 'Generate Form' button."
+        } else {
+          botTalk.innerHTML = "You have reached the end.";
+        }
+      });
+    </script>
+4    
+  </body>
+</html>

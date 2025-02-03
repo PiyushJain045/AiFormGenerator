@@ -1,0 +1,32 @@
+<!-- This templates shows the generated link which can be shared with others to fill the saved form  -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Form</title>
+    <link rel="stylesheet" href="{% static 'css/share_form.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.0"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Viola🥳, use this link to share your form📝 </h1>
+        <p class="description">Copy the link below and share it with others. Anyone with this link can access your form.</p>
+        
+        <div class="link-container">
+            <input type="text" id="shareable-link" value="{{ shareable_link }}" readonly>
+            <button onclick="copyToClipboard()" class="copy-button">Copy Link</button>
+        </div>
+
+<!-- This script enables the 'coyp to clipboard' feature -->
+    <script>
+        function copyToClipboard() {
+            const linkInput = document.getElementById('shareable-link');
+            linkInput.select();
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

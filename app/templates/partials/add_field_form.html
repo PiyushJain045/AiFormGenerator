@@ -1,0 +1,23 @@
+<form id="dynamic-form">
+    {% csrf_token %}
+    <label>Label:</label>
+    <input type="text" name="field_label" id="field_label" required>
+
+    <label for="field_type">Field Type: </label>
+    <select name="field_type" id="field_type" required hx-get="{% url 'get_suboptions' %}" hx-target="#sub-options" hx-trigger="change">
+            <option value="range">Slider</option>
+            <option value="radio">Radio</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="text">Text</option>
+            <option value="textbox">Textarea</option>
+        </select>
+
+            <div id="sub-options"></div>
+
+        <button type="submit" class="add-button" hx-post="{% url 'add_field' %}" hx-target="#dynamic-form" hx-swap="outerHTML">Save Field</button>
+        <button type="button" class="remove-button" hx-get="{% url 'remove-form' %}" hx-target="#dynamic-form" hx-swap="outerHTML">Remove</button>
+        {% if flag == True %}
+                <button type="button" class="add-button" id="add-field" hx-get="{% url 'add_field' %}" hx-target=".add-field" hx-swap="beforeend">Add Field</button>
+        {% endif %}
+</form>
+

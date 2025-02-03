@@ -1,0 +1,29 @@
+<!-- Detailed analysis about performance of form -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Analysis</title>
+</head>
+<body>
+    <h1>Form Analysis</h1>
+
+    <div>
+        <h3>Total Responses: {{ total_users }}</h3>
+    </div>
+
+    <div>
+        <h2>Graph: Responses to 'same-radio'</h2>
+        {% if graph_image %}
+            <img src="data:image/png;base64,{{ graph_image }}" alt="Graph">
+        {% else %}
+            <p>No response submitted to your form yet 🥺</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <p>Form UUID: {{ unique_id }}</p>
+    </div>
+</body>
+</html>

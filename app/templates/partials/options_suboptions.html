@@ -1,0 +1,19 @@
+{% if type == "range" %}
+<label for="min_value">Min Value:</label>
+<input type="number" name="min_value" id="min_value" required>
+
+<label for="max_value">Max Value:</label>
+<input type="number" name="max_value" id="max_value" required>
+{% endif %}
+
+{% if type == "radio" %}
+<label for="options">Options:</label>
+<input type="text" name="options" id="options" placeholder="Enter options (comma separated)" required>
+{% endif %}
+
+{% if type == "checkbox" %}
+<label for="options">Options:</label>
+<input type="text" name="options" id="options" placeholder="Enter options (comma separated)" required>
+{% endif %}
+
+
