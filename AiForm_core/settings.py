@@ -145,6 +145,9 @@ ACCOUNT_USERNAME_REQUIRED = True
 LOGIN_REDIRECT_URL = '/'  
 LOGOUT_REDIRECT_URL = '/'  
 
+CSRF_TRUSTED_ORIGINS = ['https://aiformgenerator.onrender.com']
+
+
 #Uncommand this code for sending email verification.
 
 # EMAIL_HOST = 'smtp.gmail.com'
