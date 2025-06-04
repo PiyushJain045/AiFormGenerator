@@ -21,7 +21,7 @@
                 {% if question.type == "slider" %}
                 <div class="form-group">
                     <label for="workload-slider"> {{ question.text }} </label>
-                    <input type="range" id="workload-slider" name="workload-slider" min="{{ question.min }}" max="{{ question.max|add:1 }}">
+                    <input type="range" id="workload-slider" name="workload-slider" min="{{ question.min }}" max="{{ question.max|add:1 }}" required>
                     <div class="slider-labels">
                         <span>Very Bad</span>
                         <span>Incredible!</span>
@@ -36,7 +36,7 @@
                     <div class="checkbox-group">
                         {% for choice in question.choices %}
                             <label>
-                                <input type="checkbox" name="{{ choice }}" value="{{ choice }}"> {{ choice }}
+                                <input type="checkbox" name="{{ choice }}" value="{{ choice }}"> {{ choice }} 
                             </label>
                         {% endfor %}
                     </div>
@@ -50,7 +50,7 @@
                     <div class="radio-group">
                         {% for choice in question.choices %}
                             <label>
-                                <input type="radio" name="same-radio" value="{{ choice }}"> {{ choice }}
+                                <input type="radio" name="same-radio" value="{{ choice }}" required> {{ choice }}
                             </label>
                         {% endfor %}
                     </div>
@@ -73,7 +73,7 @@
                 <div class="form-group">
                     {% if question.type == "text" %}
                         <label for="suggestions">{{ question.text }}</label>
-                        <input id="suggestions" name="suggestions" placeholder="Type your {{ question.type }} here...">
+                        <input id="suggestions" name="suggestions" placeholder="Type your {{ question.type }} here..." required>
                     {% endif %}
                 </div>
 
@@ -81,7 +81,7 @@
                 <div class="form-group">
                     {% if question.type == "textbox" %}
                         <label for="suggestions">{{ question.text }}</label>
-                        <textarea id="suggestions" name="suggestions" rows="4" placeholder="Type your {{ question.type }} here..."></textarea>
+                        <textarea id="suggestions" name="suggestions" rows="4" placeholder="Type your {{ question.type }} here..." required></textarea>
                     {% endif %}
                 </div>
 

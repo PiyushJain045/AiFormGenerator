@@ -29,54 +29,67 @@ unnamed_form_counter = 0
 
 class home(View):
     def get(self, request):
-        return render(request, "index.html")
+        try:
+            return render(request, "index.html")
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
     def post(self, request):
+        try:
         
         # Retrieving the form data from the POST request
-        print("Inside Post")
-        form_description = request.POST.get('form_description')
-        goal_objective = request.POST.get('goal_objective')
-        target_audience = request.POST.get('target_audience')
-        tone_style = request.POST.get('tone_style')
-        num_questions = request.POST.get('num_questions')
-        question_preferences = request.POST.get('question_preferences')
+            print("Inside Post")
+            form_description = request.POST.get('form_description')
+            goal_objective = request.POST.get('goal_objective')
+            target_audience = request.POST.get('target_audience')
+            tone_style = request.POST.get('tone_style')
+            num_questions = request.POST.get('num_questions')
+            question_preferences = request.POST.get('question_preferences')
 
-        # Validation of form inputs
-        errors = []
+            # Validation of form inputs
+            errors = []
 
-        if not form_description:
-            errors.append("Form description is required.")
-        if not goal_objective:
-            errors.append("Goal/objective is required.")
-        if not target_audience:
-            errors.append("Target audience is required.")
-        if not tone_style:
-            errors.append("Preferred tone/style is required.")
-        if not num_questions:
-            errors.append("Number of questions is required.")
-        if not question_preferences:
-            errors.append("Question preferences are required.")
-        
-        # If there are any validation errors, return them in the response
-        if errors:
-            message = "Please fix the following errors:\n" + "\n".join(errors)
-            return render(request, "index.html", {"message": message})
+            if not form_description:
+                errors.append("Form description is required.")
+            if not goal_objective:
+                errors.append("Goal/objective is required.")
+            if not target_audience:
+                errors.append("Target audience is required.")
+            if not tone_style:
+                errors.append("Preferred tone/style is required.")
+            if not num_questions:
+                errors.append("Number of questions is required.")
+            if not question_preferences:
+                errors.append("Question preferences are required.")
+            
+            # If there are any validation errors, return them in the response
+            if errors:
+                message = "Please fix the following errors:\n" + "\n".join(errors)
+                return render(request, "index.html", {"message": message})
 
-        # If no validation errors, continue
-        print("Stage 1: Clear")
+            # If no validation errors, continue
+            print("Stage 1: Clear")
 
-        prompt = (f"""{pr}"""
-            f"Generate a form with the following details:\n\n"
-            f"Form Description: {form_description}\n"
-            f"Goal/Objective: {goal_objective}\n"
-            f"Target Audience: {target_audience}\n"
-            f"Preferred Tone/Style: {tone_style}\n"
-            f"Number of Questions: {num_questions}\n"
-            f"Question Preferences: {question_preferences}\n"
-            f"Provide a list of {num_questions} form questions with their types (e.g., text, checkbox, radio)."
-        )
-      
+            prompt = (f"""{pr}"""
+                f"Generate a form with the following details:\n\n"
+                f"Form Description: {form_description}\n"
+                f"Goal/Objective: {goal_objective}\n"
+                f"Target Audience: {target_audience}\n"
+                f"Preferred Tone/Style: {tone_style}\n"
+                f"Number of Questions: {num_questions}\n"
+                f"Question Preferences: {question_preferences}\n"
+                f"Provide a list of {num_questions} form questions with their types (e.g., text, checkbox, radio)."
+            )
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
         try:
             response = model.generate_content(prompt)
@@ -107,136 +120,164 @@ class home(View):
 # Handels the edit for the form generated using HTMX
 class add_field(View):
     def get(self, request):
-        return render(request,"partials/add_field_form.html", {"flag": False})
+        try:
+            return render(request,"partials/add_field_form.html", {"flag": False})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
     def post(self, request):
+        try:
         # Get form data from the POST request
-        field_label = request.POST.get('field_label')
-        field_type = request.POST.get('field_type')
+            field_label = request.POST.get('field_label')
+            field_type = request.POST.get('field_type')
 
-        # Print the result in the terminal( for testting purpose )
-        # print(f"Field Label: {field_label}")
-        # print(f"Field Type: {field_type}")
+            # Print the result in the terminal( for testting purpose )
+            # print(f"Field Label: {field_label}")
+            # print(f"Field Type: {field_type}")
 
 
-        # Construct JSON based on selected option by user as well as gemini generated. 
+            # Construct JSON based on selected option by user as well as gemini generated. 
 
-        #1)Range
-        if field_type == "range":
-            min_value = request.POST.get('min_value')
-            max_value = request.POST.get('max_value')
-            print(min_value, max_value)
+            #1)Range
+            if field_type == "range":
+                min_value = request.POST.get('min_value')
+                max_value = request.POST.get('max_value')
+                print(min_value, max_value)
 
-            json_data = {
-                "questions": [
-                    {
-                        "type": "slider",
-                        "text": field_label,
-                        "min": int(min_value),
-                        "max": int(max_value),
-                        "labels": {
-                            "1": "Very Dissatisfied",
-                            "2": "Dissatisfied",
-                            "3": "Neutral",
-                            "4": "Satisfied",
-                            "5": "Very Satisfied"
+                json_data = {
+                    "questions": [
+                        {
+                            "type": "slider",
+                            "text": field_label,
+                            "min": int(min_value),
+                            "max": int(max_value),
+                            "labels": {
+                                "1": "Very Dissatisfied",
+                                "2": "Dissatisfied",
+                                "3": "Neutral",
+                                "4": "Satisfied",
+                                "5": "Very Satisfied"
+                            }
                         }
-                    }
-                ]
-            }
+                    ]
+                }
 
-        #2)Radio Button
-        elif field_type == "radio":
-            options = request.POST.get('options')
-            options_list = options.split(',') if options else []
-            print(options_list)
+            #2)Radio Button
+            elif field_type == "radio":
+                options = request.POST.get('options')
+                options_list = options.split(',') if options else []
+                print(options_list)
 
-            json_data = {
-                "questions": [
-                    {
-                        "type": "single-choice",
-                        "text": field_label,
-                        "choices": options_list
-                    }
-                ]
-            }
+                json_data = {
+                    "questions": [
+                        {
+                            "type": "single-choice",
+                            "text": field_label,
+                            "choices": options_list
+                        }
+                    ]
+                }
 
-        #3) Checkbox
-        elif field_type == "checkbox":
-            options = request.POST.get('options')
-            options_list = options.split(',') if options else []
-            print(options_list)
+            #3) Checkbox
+            elif field_type == "checkbox":
+                options = request.POST.get('options')
+                options_list = options.split(',') if options else []
+                print(options_list)
 
-            json_data = {
-                "questions": [
-                    {
-                        "type": "multiple-choice",
-                        "text": field_label,
-                        "labels": options_list
-                    }
-                ]
-            }
+                json_data = {
+                    "questions": [
+                        {
+                            "type": "multiple-choice",
+                            "text": field_label,
+                            "labels": options_list
+                        }
+                    ]
+                }
 
-        #4) text
-        elif field_type == "text":
-            json_data = {
-                "questions": [
-                    {
-                        "type": "text",
-                        "text": field_label
-                    }
-                ]
-            }
+            #4) text
+            elif field_type == "text":
+                json_data = {
+                    "questions": [
+                        {
+                            "type": "text",
+                            "text": field_label
+                        }
+                    ]
+                }
 
-        #5) Textbox
-        elif field_type == "textbox":
-            json_data = {
-                "questions": [
-                    {
-                        "type": "textbox",
-                        "text": field_label
-                    }
-                ]
-            }
+            #5) Textbox
+            elif field_type == "textbox":
+                json_data = {
+                    "questions": [
+                        {
+                            "type": "textbox",
+                            "text": field_label
+                        }
+                    ]
+                }
 
-        else:
-            return HttpResponse("Invalid field type", status=400)
+            else:
+                return HttpResponse("Invalid field type", status=400)
 
-        return render(request, "partials/partial_df.html", {"form_data": json_data, "flag": True})
+            return render(request, "partials/partial_df.html", {"form_data": json_data, "flag": True})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 # Remove the added field
 def remove_form(request):
-    return render(request, "partials/partial_df.html", {"flag": True})
+    try:
+        return render(request, "partials/partial_df.html", {"flag": True})
+    except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 # add suboptions
 class GetSuboptions(View):
     def get(self, request):
-        field_type = request.GET.get('field_type')
+        try:
+            field_type = request.GET.get('field_type')
 
-        if field_type == 'range':
-            type = "range"
-            # Return fields for min_value and max_value
-            return render(request, 'partials/options_suboptions.html', {"type": type})
-        
-        elif field_type == 'radio':
-            # Return fields for options input
-            type = "radio"
-            return render(request, 'partials/options_suboptions.html', {"type": type})
-        
-        elif field_type == 'checkbox':
-            # Return fields for options input
-            type = "checkbox"
-            return render(request, 'partials/options_suboptions.html', {"type": type})
-        
-        elif field_type == 'textbox':
-            type = "textbox"
-            # Return fields for options input
-            return render(request, 'partials/options_suboptions.html', {"type": type})
-        
-        elif field_type == 'text':
-            type = "text"
-            # Return fields for options input
-            return render(request, 'partials/options_suboptions.html', {"type": type})
+            if field_type == 'range':
+                type = "range"
+                # Return fields for min_value and max_value
+                return render(request, 'partials/options_suboptions.html', {"type": type})
+            
+            elif field_type == 'radio':
+                # Return fields for options input
+                type = "radio"
+                return render(request, 'partials/options_suboptions.html', {"type": type})
+            
+            elif field_type == 'checkbox':
+                # Return fields for options input
+                type = "checkbox"
+                return render(request, 'partials/options_suboptions.html', {"type": type})
+            
+            elif field_type == 'textbox':
+                type = "textbox"
+                # Return fields for options input
+                return render(request, 'partials/options_suboptions.html', {"type": type})
+            
+            elif field_type == 'text':
+                type = "text"
+                # Return fields for options input
+                return render(request, 'partials/options_suboptions.html', {"type": type})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 
 
@@ -258,8 +299,11 @@ def save_form_data(request):
             return render(request, "myforms.html", {"forms_list": context['user_forms']})
         
         except Exception as e:
-            print(e)
-            return render(request, "myforms.html")
+            error_message = str(e)
+            return render(request, "myforms.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
         
     if request.method == "POST":
         try:
@@ -281,8 +325,11 @@ def save_form_data(request):
             return JsonResponse({"status": "success", "message": "Form created successfully!"})
         
         except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)})
-    
+            error_message = str(e)
+            return render(request, "myforms.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 
 def view_form(request, form_id):
@@ -291,7 +338,11 @@ def view_form(request, form_id):
             form = get_object_or_404(UserFormTemplate, id=form_id, user=request.user)
             return render(request, "user_form.html", {"html_code":form.html_code, "form_id": form_id, "form_css": form.css_files})
         except Exception as e:
-            return render(request, "user_form.html", {"error": str(e)})
+            error_message = str(e)
+            return render(request, "myforms.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
         
         
     if request.method == "POST":
@@ -329,133 +380,179 @@ def view_form(request, form_id):
             return JsonResponse({"status": "success", "message": message})
 
         except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)})
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 
 
 # Logic to share form link
 def share_form(request, unique_id):
-        if request.method == "GET":
-        # Generate the full URL for the unique_id
-            base_url = request.build_absolute_uri(reverse("fill-form", args=[unique_id]))
-            return render(request, "share_form.html", {"shareable_link": base_url})
+        try:
+            if request.method == "GET":
+            # Generate the full URL for the unique_id
+                base_url = request.build_absolute_uri(reverse("fill-form", args=[unique_id]))
+                return render(request, "share_form.html", {"shareable_link": base_url})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 
 
 ## Logic for others to fill the form
 @csrf_exempt 
 def fill_form(request, unique_id):
-    form_template = get_object_or_404(UserFormTemplate, unique_id=unique_id)
+    try:
+        form_template = get_object_or_404(UserFormTemplate, unique_id=unique_id)
+        
+        if request.method == "POST":
+            # Handle form submission from a randommperson.
+
+            # print("INSIDE POST") testing purpose
+            # print(unique_id) Testing Purpose
+            response_data = dict(request.POST)
+            # print(response_data)
+            response_data.pop("csrfmiddlewaretoken", None) 
+            
+                
+            FormResponse.objects.create(
+                form_template= form_template,
+                user=request.user if request.user.is_authenticated else None,
+                response_data=response_data,
+            )
+            user=request.user if request.user.is_authenticated else None
+            print(user)
+            return render(request, "form_saved_succ.html", {"unique_id": unique_id, "user": user})
+        
+        
+        
+        # Fetch the form template using the unique_id
+        form_template = get_object_or_404(UserFormTemplate, unique_id=unique_id)
+        html_code = form_template.html_code
+        css_path = form_template.css_files
+        print("CSS FILES:", css_path)
+
+        start_remove = '<div class="add-field">'
+
+        start_index = html_code.find(start_remove)
+        # print("Start Index", start_index) #Testing purpose
+
+        if start_index != -1:
+            sliced_html_code = html_code[:start_index] 
+
+        sliced_html_code = sliced_html_code.replace('/User-Forms', f'/fill-form/{unique_id}/')
+
+        # print(sliced_html_code)
+        return render(request, "fill_form.html", {"form_template": sliced_html_code, "unique_id": unique_id, "css_path":css_path})
+    except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
     
-    if request.method == "POST":
-        # Handle form submission from a randommperson.
-
-        # print("INSIDE POST") testing purpose
-        # print(unique_id) Testing Purpose
-        response_data = dict(request.POST)
-        # print(response_data)
-        response_data.pop("csrfmiddlewaretoken", None) 
-        FormResponse.objects.create(
-            form_template= form_template,
-            user=request.user if request.user.is_authenticated else None,
-            response_data=response_data,
-        )
-        user=request.user if request.user.is_authenticated else None
-        print(user)
-        return render(request, "form_saved_succ.html", {"unique_id": unique_id, "user": user})
-    
-    
-    
-    # Fetch the form template using the unique_id
-    form_template = get_object_or_404(UserFormTemplate, unique_id=unique_id)
-    html_code = form_template.html_code
-    css_path = form_template.css_files
-    print("CSS FILES:", css_path)
-
-    start_remove = '<div class="add-field">'
-
-    start_index = html_code.find(start_remove)
-    # print("Start Index", start_index) #Testing purpose
-
-    if start_index != -1:
-        sliced_html_code = html_code[:start_index] 
-
-    sliced_html_code = sliced_html_code.replace('/User-Forms', f'/fill-form/{unique_id}/')
-
-    # print(sliced_html_code)
-    return render(request, "fill_form.html", {"form_template": sliced_html_code, "unique_id": unique_id, "css_path":css_path})
 
 
 # Handels the form analysis feautre.
 def analysis(request, unique_id):
-        if request.method == "GET":
-        # Fetch the form and responses
-            try:
-                form = get_object_or_404(UserFormTemplate, unique_id=unique_id)
-                responses = FormResponse.objects.filter(form_template=form)
+    if request.method == "GET":
+        try:
+            form = get_object_or_404(UserFormTemplate, unique_id=unique_id)
+            responses = FormResponse.objects.filter(form_template=form)
 
-                # 1) Total Users
-                total_users = responses.count()
+            total_users = responses.count()
+            data = [response.response_data for response in responses]
+            df = pd.DataFrame(data)
 
-                # Convert responses to a DataFrame
-                data = [response.response_data for response in responses]
-                df = pd.DataFrame(data)
+            if "same-radio" in df.columns:
+                same_radio_counts = df["same-radio"].explode().value_counts()
+            else:
+                same_radio_counts = pd.Series([])
 
-                # 2) Radio graph. Only Radio graph for now.
-                if "same-radio" in df.columns:
-                    same_radio_counts = df["same-radio"].explode().value_counts()
-                else:
-                    same_radio_counts = pd.Series([])
+            plt.figure(figsize=(6, 4))
+            same_radio_counts.plot(kind="bar", color="skyblue", alpha=0.7)
+            plt.title("Responses to 'same-radio'")
+            plt.xlabel("Choices")
+            plt.ylabel("Count")
+            plt.xticks(rotation=45)
+            plt.tight_layout()
 
-                # Generate a graph using Matplotlib
-                plt.figure(figsize=(6, 4))
-                same_radio_counts.plot(kind="bar", color="skyblue", alpha=0.7)
-                plt.title("Responses to 'same-radio'")
-                plt.xlabel("Choices")
-                plt.ylabel("Count")
-                plt.xticks(rotation=45)
-                plt.tight_layout()
+            buffer = BytesIO()
+            plt.savefig(buffer, format="png")
+            buffer.seek(0)
+            graph_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
+            buffer.close()
+            plt.close()
 
-                # Save the graph to a BytesIO buffer
-                buffer = BytesIO()
-                plt.savefig(buffer, format="png")
-                buffer.seek(0)
-                graph_image = base64.b64encode(buffer.getvalue()).decode("utf-8")
-                buffer.close()
-                plt.close()
-            except TypeError as e:
-                print(f"Error generating plot: {e}")
-                graph_image = None
+            error_message = None if graph_image else "No response submitted to your form yet 🥺"
 
-                # Pass the graph to the template
-                return render(
-                    request, 
-                    "form_analysis.html", 
-                    {"unique_id": unique_id, "graph_image": graph_image, "total_users": total_users, 
-                     "error_message": None if graph_image else "No response submitted to your form yet 🥺"
-                     }
-                )
+        except TypeError as e:
+            print("INSIDE")
+            print(f"Error generating plot: {e}")
+            graph_image = None
+            total_users = 0
+            error_message = "No response submitted to your form yet 🥺"
+
+        # ✅ Always return here, outside the try-except
+        return render(
+            request,
+            "form_analysis.html",
+            {
+                "unique_id": unique_id,
+                "graph_image": graph_image,
+                "total_users": total_users,
+                "error_message": error_message
+            }
+        )
+              
+
         
 # Designs for form. Coming Soon...
 def templates_view(request, slug):
     if request.method == "GET":
-        print("Inside************")
-        print("SLUG:",slug)
-        return render(request, 'designs.html', {"slug": slug})
+        try:
+            print("Inside************")
+            print("SLUG:",slug)
+            return render(request, 'designs.html', {"slug": slug})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
     if request.method == "POST":
-        slug = request.POST.get("slug")
-        print(slug)
-        return render(request, "view_design.html", {"slug": slug})
+        try:
+            slug = request.POST.get("slug")
+            print(slug)
+            return render(request, "view_design.html", {"slug": slug})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
 def dynamic_form_view(request):
     # Get selected design from GET request (default to 'dynamic_form.css' if none is selected)
-    selected_design = request.GET.get("selected_design", "dynamic_form")
-    slug = request.GET.get("slug")
-    print(slug)
-    # Construct the correct CSS file path
-    css_path = f"/static/css/designs/{selected_design}.css" if selected_design != "dynamic_form" else "css/dynamic_form.css"
-    print(css_path)
+    try:
+        selected_design = request.GET.get("selected_design", "dynamic_form")
+        slug = request.GET.get("slug")
+        print(slug)
+        # Construct the correct CSS file path
+        css_path = f"/static/css/designs/{selected_design}.css" if selected_design != "dynamic_form" else "css/dynamic_form.css"
+        print(css_path)
+    except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
     try:
         form = get_object_or_404(UserFormTemplate, id=slug, user=request.user)
@@ -465,10 +562,24 @@ def dynamic_form_view(request):
 
 def demo_design(request):
     if request.method == "GET":
-        return render(request, "demo_design.html")
+        try:
+            return render(request, "demo_design.html")
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
 
     if request.method == "POST":
-        selected_design = request.POST.get("selected_design", "dynamic_form")
+        try:
+            selected_design = request.POST.get("selected_design", "dynamic_form")
 
-        print(selected_design)
-        return render(request, "view_design.html", {"selected_design":selected_design})
+            print(selected_design)
+            return render(request, "view_design.html", {"selected_design":selected_design})
+        except Exception as e:
+            error_message = str(e)
+            return render(request, "error/error.html", {
+                "status_code": 500,
+                "error_message": error_message
+            })
