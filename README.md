@@ -1,5 +1,5 @@
 - [Video Demo](https://youtu.be/t-1YEd-Y4sE) 
-- [Ai Form Generator]([http://16.171.33.245:8000/](https://aiformgenerator.onrender.com/))  | Note: not optimized for mobile
+- [Ai Form Generator](https://aiformgenerator.onrender.com/)  | Note: not optimized for mobile
 # AI Form Generator 🤖📝  
 
 Welcome to **AI Form Generator**, where Wall-E, the lovable robot, guides you through the magical world of form creation! 🚀  
