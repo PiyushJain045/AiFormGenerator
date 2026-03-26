@@ -72,5 +72,15 @@ Who said forms had to be boring? Let’s build **smarter, more exciting forms** 
 
 **And voilà! Your setup is complete.** 🎉  
 
-**Thanks for checking out this repo!** 🙌  
+### Screenshots
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161047" src="https://github.com/user-attachments/assets/edcf6f8e-c7f5-4feb-b59f-bb730ed93b8e" />
 
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161058" src="https://github.com/user-attachments/assets/54676c68-7786-4b68-95d1-6d37294efe7c" />
+
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161119" src="https://github.com/user-attachments/assets/3ec646a3-6e62-4e1b-9acb-c402b2541c1f" />
+
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161131" src="https://github.com/user-attachments/assets/ea1a7939-af74-4782-84c2-0e470cc22cb4" />
+
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161142" src="https://github.com/user-attachments/assets/cacaa57c-bfbb-4ca6-a06b-c2e114bec471" />
+
+<img width="1920" height="1080" alt="Screenshot 2026-03-26 161156" src="https://github.com/user-attachments/assets/1689242e-a807-4d4a-b8fe-47a21b46ad1a" />
